@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<!--<div th:replace="fragments/header :: header">...</div>-->
+<p th:text="'Hello, ' + ${name} + '!'" />
+
+<p>vor Ihnen waren folgende Personen da</p>
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${greetings.size()==0}">
+        <td colspan="2">No Greetings</td>
+    </tr>
+    <tr th:each="greeting : ${greetings}">
+        <td th:text="${greeting.id}" />
+        <td><a href="delete.html" th:href="@{'/delete?id=' + ${greeting.id}}"
+               th:text="${greeting.name}" /></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>
