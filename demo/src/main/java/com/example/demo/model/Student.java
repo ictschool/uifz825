@@ -10,8 +10,8 @@ public class Student extends Person {
     @Column(unique = true)
     private String matNumber;
     @OneToMany(cascade = {CascadeType.ALL},
-            mappedBy = "student",
-            orphanRemoval = true, fetch = FetchType.EAGER)
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "studentFk")
     private List<Grade> gradeList = new ArrayList<>();
 
     public Student(){

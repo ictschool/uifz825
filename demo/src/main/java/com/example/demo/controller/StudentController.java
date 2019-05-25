@@ -21,9 +21,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @Autowired
-    private GradeRepository gradeRepository;
-
     @PostMapping
     /**
      * wird ein Formular via Post abgesendet, greift diese Methode
@@ -33,6 +30,9 @@ public class StudentController {
      * @Model stellt das Binding zur Template Datei her
      */
     public String add(@ModelAttribute @Valid Student student, @ModelAttribute Grade grade, Model model){
+        System.out.println("Anzahl Grades: "+student.getGradeList().size());
+        if(grade.getModule().length() >= 1)
+            student.getGradeList().add(grade);
         studentService.addPerson(student);
         model.addAttribute("saved", true);
         Optional<Long> optional = Optional.of(student.getId());

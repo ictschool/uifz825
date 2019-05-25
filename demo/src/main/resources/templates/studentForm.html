@@ -23,12 +23,14 @@
         <p>Address-City: <input type="text" th:field="*{address.city.name}" /></p>
         <fieldset>
             <p>MatrikelNummer: <input type="text" th:field="*{matNumber}" /></p>
-            <!--<ul>
+            <ul>
                 <li th:object="${grade}"><input type="text" th:field="*{module}" /><input type="text" th:field="*{value}" /> </li>
-            </ul>-->
+            </ul>
             <ul th:each="localgrade, itemStat : *{gradeList}">
                 <li>
-                    <span th:text="*{gradeList[__${itemStat.index}__].module}"></span> <span th:text="*{gradeList[__${itemStat.index}__].value}"></span>
+                    <input type="hidden" th:field="*{gradeList[__${itemStat.index}__].id}">
+                    <input type="text" th:field="*{gradeList[__${itemStat.index}__].module}">
+                    <input type="text" th:field="*{gradeList[__${itemStat.index}__].value}">
                 </li>
             </ul>
 

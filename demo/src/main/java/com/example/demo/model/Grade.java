@@ -21,25 +21,12 @@ public class Grade {
     @NotNull
     private float value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "studentFk")
-    private Student student;
-
     public Grade() {
     }
 
     public Grade(Student student, @NotNull @NotEmpty String module, @Min(1) @NotNull float value) {
         this.module = module;
         this.value = value;
-        this.student = student;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 
     public Long getId() {

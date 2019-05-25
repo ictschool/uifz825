@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface GradeRepository extends JpaRepository<Grade,Integer>, CrudRepository<Grade,Integer> {
 
-    List<Grade> findAllByStudentId(Long id);
+
 
 }
