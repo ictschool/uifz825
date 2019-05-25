@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.City;
 import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 import com.example.demo.service.PersonService;
@@ -38,7 +39,7 @@ public class PersonServiceTest {
     @Test
     public void addPerson(){
         Person person = new Person("Buchs", "Enrico");
-        person.setAddress(new Address("Buchenweg 5", "2552", "Orpund"));
+        person.setAddress(new Address("Buchenweg 5", new City("2552", "Orpund")));
 
         Mockito.when(personRepository.saveAndFlush(person)).thenReturn(correctPerson);
 
@@ -50,7 +51,7 @@ public class PersonServiceTest {
     public void addPersonFailure(){
         try {
             Person person = new Person("Buchs", "Enrico");
-            person.setAddress(new Address("", "2552", "Orpund"));
+            person.setAddress(new Address("", new City("2552", "Orpund")));
 
             Mockito.when(personRepository.saveAndFlush(person)).thenReturn(person);
 

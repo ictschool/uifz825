@@ -16,20 +16,17 @@ public class Address {
     @NotEmpty
     @NotNull
     private String street;
-    @NotNull
-    @NotEmpty
-    @Size(max = 4)
-    private String zip;
-    @NotNull
-    @NotEmpty
-    private String city;
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "cityFk")
+    private City city;
+
 
     public Address() {
     }
 
-    public Address(String street, String zip, String city) {
+    public Address(String street, City city) {
         this.street = street;
-        this.zip = zip;
         this.city = city;
     }
 
@@ -49,19 +46,11 @@ public class Address {
         this.street = street;
     }
 
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.City;
 import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class PersonRepositoryTest {
     @Test
     public void personSaveTest(){
         Person person = new Person("Buchs", "Enrico");
-        Address address = new Address("Buchenweg 5", "2552", "Orpund");
+        Address address = new Address("Buchenweg 5", new City("2552", "Orpund"));
         person.setAddress(address);
 
         personRepository.saveAndFlush(person);
@@ -37,7 +38,7 @@ public class PersonRepositoryTest {
     public void personSaveFailureTest(){
         try{
             Person person = new Person("", "Enrico");
-            Address address = new Address("Buchenweg 5", "2552", "Orpund");
+            Address address = new Address("Buchenweg 5", new City("2552", "Orpund"));
             person.setAddress(address);
 
             personRepository.saveAndFlush(person);

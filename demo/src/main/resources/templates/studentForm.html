@@ -6,22 +6,34 @@
 </head>
 <body>
 
-    <p th:if="${saved}">Person gespeichert</p>
+    <p th:if="${saved}">Student gespeichert</p>
 
     <!-- th:object stellt den Objektbezug her -->
-    <form method="post" th:action="@{/person}" th:object="${person}">
+    <form method="post" th:action="@{/student}" th:object="${student}">
         <!-- Die Ids werden benötigt damit geändert werden kann (bei nur insert ist es nicht relevant) -->
-        <!--<input type="hidden" th:field="*{id}" />-->
+        <input type="hidden" th:field="*{id}" />
         <input type="hidden" th:field="*{address.id}" />
         <input type="hidden" th:field="*{address.city.id}" />
         <!-- für das binden der Felder wird als Referenzzeichen * verwendet
             d.h. das Objekt Person hat ein Attribut name -->
-        <p>Id: <input type="text" th:field="*{id}" readonly /></p>
         <p>Name: <input type="text" th:field="*{name}" /></p>
         <p>Firstname: <input type="text" th:field="*{firstname}" /></p>
         <p>Address-Street: <input type="text" th:field="*{address.street}" /></p>
         <p>Address-ZIP: <input type="text" th:field="*{address.city.zip}" /></p>
         <p>Address-City: <input type="text" th:field="*{address.city.name}" /></p>
+        <fieldset>
+            <p>MatrikelNummer: <input type="text" th:field="*{matNumber}" /></p>
+            <!--<ul>
+                <li th:object="${grade}"><input type="text" th:field="*{module}" /><input type="text" th:field="*{value}" /> </li>
+            </ul>-->
+            <ul th:each="localgrade, itemStat : *{gradeList}">
+                <li>
+                    <span th:text="*{gradeList[__${itemStat.index}__].module}"></span> <span th:text="*{gradeList[__${itemStat.index}__].value}"></span>
+                </li>
+            </ul>
+
+        </fieldset>
+
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 
     </form>
