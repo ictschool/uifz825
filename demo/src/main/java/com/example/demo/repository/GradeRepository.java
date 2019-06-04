@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface GradeRepository extends JpaRepository<Grade,Integer>, CrudRepository<Grade,Integer> {
+public interface GradeRepository extends JpaRepository<Grade,Long>, CrudRepository<Grade,Long> {
 
 
 

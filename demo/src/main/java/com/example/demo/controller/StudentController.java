@@ -21,6 +21,9 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private GradeRepository gradeRepository;
+
     @PostMapping
     /**
      * wird ein Formular via Post abgesendet, greift diese Methode
@@ -52,6 +55,17 @@ public class StudentController {
         model.addAttribute("grade", new Grade());
         return "studentForm";
     }
+
+    @PostMapping(value = "deleteGrade", params = {"id"})
+    @ResponseBody
+    public String deleteGrade(@RequestParam("id") Long id){
+        Optional<Grade> gradeOptional = gradeRepository.findById(id);
+        if(gradeOptional.isPresent())
+            gradeRepository.delete(gradeOptional.get());
+        System.out.println("DELETE");
+        return "DELETED: " + id;
+    }
+
 
 
 }

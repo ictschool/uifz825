@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface StudentRepository extends JpaRepository<Student,Integer>, CrudRepository<Student,Integer> {
+public interface StudentRepository extends JpaRepository<Student,Long>, CrudRepository<Student,Long> {
 
     Optional<Student> findById(Long id);
 

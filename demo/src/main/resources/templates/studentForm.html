@@ -26,11 +26,12 @@
             <ul>
                 <li th:object="${grade}"><input type="text" th:field="*{module}" /><input type="text" th:field="*{value}" /> </li>
             </ul>
-            <ul th:each="localgrade, itemStat : *{gradeList}">
-                <li>
+            <ul>
+                <li th:each="localgrade, itemStat : *{gradeList}">
                     <input type="hidden" th:field="*{gradeList[__${itemStat.index}__].id}">
                     <input type="text" th:field="*{gradeList[__${itemStat.index}__].module}">
                     <input type="text" th:field="*{gradeList[__${itemStat.index}__].value}">
+                    <a onclick="deleteGrade(this)" href="#" th:id="*{gradeList[__${itemStat.index}__].id}">Löschen</a>
                 </li>
             </ul>
 
@@ -39,6 +40,22 @@
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 
     </form>
+
+    <script>
+        function deleteGrade(element){
+            var data = new FormData();
+            data.append('id', element.id);
+            console.log(value);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/student/deleteGrade', true);
+            xhr.onload = function () {
+                element.parentElement.parentElement.removeChild(element.parentElement);
+                console.log(this.responseText);
+            };
+            xhr.send(data);
+        }
+    </script>
 
 </body>
 </html>
